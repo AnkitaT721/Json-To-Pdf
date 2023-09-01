@@ -2,11 +2,14 @@ import { createStore } from "redux";
 import { combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { getStudentReducer, newStudentReducer } from "./reducers";
+import { allStudentsReducer, editStudentReducer, getStudentReducer, newStudentReducer, uploadFilesReducer } from "./reducers";
 
 const reducer = combineReducers({
   newStudent: newStudentReducer,
-  getStudent: getStudentReducer
+  getStudent: getStudentReducer,
+  allStudents: allStudentsReducer,
+  editStudent: editStudentReducer,
+  uploadFiles: uploadFilesReducer
 });
 
 let initialState = {};

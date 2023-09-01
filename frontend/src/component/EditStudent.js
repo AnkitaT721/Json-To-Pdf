@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { NavLink, useNavigate } from "react-router-dom";
-import { clearErrors, createStudent } from "../actions";
-import { CREATE_STUDENT_RESET } from "../constants";
+import { clearErrors, getSingleStudent, updateStudent } from "../actions";
+import { UPDATE_STUDENT_RESET } from "../constants";
+import { useNavigate, useParams } from "react-router-dom";
 
-const Home = () => {
+const EditStudent = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { id } = useParams();
 
-  const { error, success, student } = useSelector((state) => state.newStudent);
+  
+  const { student, error } = useSelector((state) => state.getStudent);
+  const { error: updateError, isUpdated } = useSelector(
+    (state) => state.editStudent
+  );
 
   const [name, setName] = useState("");
   const [major, setMajor] = useState("");
@@ -18,20 +23,7 @@ const Home = () => {
   const [address2, setAddress2] = useState("");
   const [city, setCity] = useState("");
 
-  useEffect(() => {
-    if (error) {
-      alert(error);
-      dispatch(clearErrors());
-    }
-
-    if (success) {
-      alert("Student Created Successfully");
-      navigate(`student/${student._id}`);
-      dispatch({ type: CREATE_STUDENT_RESET });
-    }
-  }, [dispatch, error, navigate, success, student._id]);
-
-  const createStudentHandler = (e) => {
+  const updateStudentSubmitHandler = (e) => {
     e.preventDefault();
 
     const myForm = new FormData();
@@ -46,8 +38,46 @@ const Home = () => {
     myForm.set("address[0][address_2]", address2);
     myForm.set("address[0][city]", city);
 
-    dispatch(createStudent(myForm));
+    dispatch(updateStudent(id, myForm));
   };
+
+  useEffect(() => {
+    if (student && student._id !== id) {
+      dispatch(getSingleStudent(id));
+    } else {
+      setName(student.name);
+      setMajor(student.major);
+      setState(student.address[0].state);
+      setZip(student.address[0].zip);
+      setAddress1(student.address[0].address_1);
+      setAddress2(student.address[0].address_2);
+      setCity(student.address[0].city);
+    }
+    if (error) {
+      alert(error);
+      dispatch(clearErrors());
+    }
+
+    if (updateError) {
+      alert(updateError);
+      dispatch(clearErrors());
+    }
+
+    if (isUpdated) {
+      alert("Student Updated Successfully");
+      navigate(`/student/${student._id}`);
+      dispatch({ type: UPDATE_STUDENT_RESET });
+    }
+  }, [
+    dispatch,
+    navigate,
+    error,
+    updateError,
+    student,
+    isUpdated,
+    id,
+    student._id,
+  ]);
 
   return (
     <>
@@ -55,7 +85,7 @@ const Home = () => {
         <div className="student-form">
           <h2 className="form-title">Student Data</h2>
 
-          <form onSubmit={createStudentHandler}>
+          <form onSubmit={updateStudentSubmitHandler}>
             <p>
               Name: <span></span>
               <input
@@ -130,18 +160,12 @@ const Home = () => {
               />
             </p>
 
-            <button type="submit">Create Student</button>
+            <button type="submit">Update Student</button>
           </form>
         </div>
       </section>
-      <div>
-      <NavLink to="/students" className="all-students">All Students</NavLink>
-      </div>
-      <div>
-      <NavLink to="/mergepdfs" className="merge-pdf">Merge Pdf</NavLink>
-      </div>
     </>
   );
 };
 
-export default Home;
+export default EditStudent;

@@ -1,4 +1,5 @@
 const Student = require("../models/studentModel");
+const express = require("express");
 
 //create student
 exports.createStudent = async (req, res) => {
@@ -71,5 +72,19 @@ exports.updateStudent = async (req, res) => {
       success: false,
       message: error.message,
     });
+  }
+};
+
+
+//upload pdf files to merge
+exports.uploadPdfs = async (req, res) => {
+  try {
+    res.send({
+      status: 200,
+      success: true,
+      files: req.files
+    })
+  } catch (error) {
+    res.send({ status: 400, success: false, message: error.message });
   }
 };
