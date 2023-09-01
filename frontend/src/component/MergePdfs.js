@@ -5,11 +5,9 @@ import { clearErrors, uploadPdfs } from "../actions";
 const MergePdfs = () => {
   const dispatch = useDispatch();
 
-  const { error, pdfs, success } = useSelector((state) => state.uploadFiles);
+  const { error, success } = useSelector((state) => state.uploadFiles);
 
   const [selectedFiles, setSelectedFiles] = useState([]);
-
-  console.log(pdfs);
 
   const uploadFilesHandler = (e) => {
     e.preventDefault();
@@ -53,7 +51,7 @@ const MergePdfs = () => {
           />
           <input
             type="submit"
-            value="Submit"
+            value="Merge"
             className="submit-pdfs"
             id="fileInput"
           />

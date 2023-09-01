@@ -8,6 +8,7 @@ const bodyParser = require("body-parser");
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use("/static", express.static("public"));
 
 //route import
 const student = require("./routes/studentRoutes");

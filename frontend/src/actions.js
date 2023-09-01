@@ -109,7 +109,7 @@ export const updateStudent = (id, studentData) => async (dispatch) => {
 };
 
 
-//create student
+//upload pdfs
 export const uploadPdfs = (pdfFiles) => async (dispatch) => {
   try {
     dispatch({ type: UPLOAD_FILES_REQUEST });

@@ -1,5 +1,6 @@
 const Student = require("../models/studentModel");
-const express = require("express");
+const {mergePdfs} = require("../mergePdf");
+const path = require("path");
 
 //create student
 exports.createStudent = async (req, res) => {
@@ -79,6 +80,13 @@ exports.updateStudent = async (req, res) => {
 //upload pdf files to merge
 exports.uploadPdfs = async (req, res) => {
   try {
+
+    const pdf1Path = path.join(__dirname, '..', 'public', 'uploads', req.files[0].filename);
+    const pdf2Path = path.join(__dirname, '..', 'public', 'uploads', req.files[1].filename);
+
+    await mergePdfs(pdf1Path, pdf2Path);
+    // res.redirect("http://localhost:3000/merged.pdf");
+
     res.send({
       status: 200,
       success: true,

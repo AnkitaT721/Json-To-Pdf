@@ -6,7 +6,7 @@ const multer = require("multer");
 
 const path = require("path");
 
-const upload = multer({dest: path.join(__dirname, "../uploads")})
+const upload = multer({dest: path.join(__dirname, "../public/uploads")})
 
 router.route("/").post(createStudent);
 router.route("/student/:id").get(getSingleStudent);
