@@ -1,0 +1,21 @@
+.student-data {
+  padding: 2% 2%;
+  transform: scale(0.8, 0.8);
+  width: 40%;
+  display: inline-block;
+}
+
+.data {
+  border: 1px solid rgb(148, 148, 148);
+  padding: 2%;
+}
+
+.download-btn {
+    padding: 1vmax;
+}
+
+.download-btn:hover {
+    background-color: rgb(143, 142, 142);
+    color: white;
+    border: rgb(143, 142, 142);
+}

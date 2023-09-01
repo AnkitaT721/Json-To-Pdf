@@ -4,8 +4,12 @@ import {
   CREATE_STUDENT_FAIL,
   CREATE_STUDENT_REQUEST,
   CREATE_STUDENT_SUCCESS,
+  GET_STUDENT_FAIL,
+  GET_STUDENT_REQUEST,
+  GET_STUDENT_SUCCESS,
 } from "./constants";
 
+//create student
 export const createStudent = (studentData) => async (dispatch) => {
   try {
     dispatch({ type: CREATE_STUDENT_REQUEST });
@@ -23,6 +27,25 @@ export const createStudent = (studentData) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: CREATE_STUDENT_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+//get single student
+export const getSingleStudent = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: GET_STUDENT_REQUEST });
+
+    const { data } = await axios.get(`/api/v1/student/${id}`);
+
+    dispatch({
+      type: GET_STUDENT_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: GET_STUDENT_FAIL,
       payload: error.response.data.message,
     });
   }
