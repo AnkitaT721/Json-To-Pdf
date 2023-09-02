@@ -1,5 +1,5 @@
 /node_modules
 
-../backend/public
+/backend/public
 
-../backend/upload
+/backend/upload
