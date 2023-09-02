@@ -10,6 +10,9 @@ import {
   GET_STUDENT_FAIL,
   GET_STUDENT_REQUEST,
   GET_STUDENT_SUCCESS,
+  SEND_EMAIL_FAIL,
+  SEND_EMAIL_REQUEST,
+  SEND_EMAIL_SUCCESS,
   UPDATE_STUDENT_FAIL,
   UPDATE_STUDENT_REQUEST,
   UPDATE_STUDENT_SUCCESS,
@@ -132,6 +135,46 @@ export const uploadPdfs = (pdfFiles) => async (dispatch) => {
   }
 };
 
+
+//get mail address
+// export const getMailAddress = (mailAddress) => async (dispatch) => {
+//   try {
+//     dispatch({ type: SEND_EMAIL_REQUEST });
+
+//     const config = {
+//       headers: { "Content-Type": "application/json" },
+//     };
+
+//     const { data } = await axios.post(`/api/v1/sendmail`, mailAddress, config);
+
+//     dispatch({
+//       type: SEND_EMAIL_SUCCESS,
+//       payload: data,
+//     });
+//   } catch (error) {
+//     dispatch({
+//       type: SEND_EMAIL_FAIL,
+//       payload: error.response.data.message,
+//     });
+//   }
+// };
+
+
+export const getMailAddress = (mail) => async (dispatch) => {
+  try {
+    dispatch({ type: SEND_EMAIL_REQUEST });
+
+    const config = { headers: { "Content-Type": "application/json" } };
+
+    const { data } = await axios.post(`/api/v1/sendmail`, mail, config);
+    dispatch({ type: SEND_EMAIL_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: SEND_EMAIL_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
 
 //clearing errors
 export const clearErrors = () => async (dispatch) => {

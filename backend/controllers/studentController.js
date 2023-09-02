@@ -1,5 +1,6 @@
 const Student = require("../models/studentModel");
 const {mergePdfs} = require("../mergePdf");
+const nodeMailer = require("nodemailer");
 const path = require("path");
 
 //create student
@@ -80,7 +81,7 @@ exports.updateStudent = async (req, res) => {
 //upload pdf files to merge
 exports.uploadPdfs = async (req, res) => {
   try {
-
+    
     const pdf1Path = path.join(__dirname, '..', 'public', 'uploads', req.files[0].filename);
     const pdf2Path = path.join(__dirname, '..', 'public', 'uploads', req.files[1].filename);
 
@@ -96,3 +97,45 @@ exports.uploadPdfs = async (req, res) => {
     res.send({ status: 400, success: false, message: error.message });
   }
 };
+
+
+//email the merged pdf
+exports.sendEmail = async (req, res) => {  //options object: {email, subject, message} 
+  try {
+
+    const {mail} = req.body;
+
+    let transporter = nodeMailer.createTransport({
+      service: "gmail",
+      host: "smtp.gmail.com",
+      port: 587,
+      secure: false,    //smtp: Simple Mail Transfer Protocol
+      auth: {
+          user: "clickshop2079@gmail.com",
+          pass: "ztlidkrejfvebdtd"
+      }
+  })
+
+  let mailOptions = {
+    from: "clickshop2079@gmail.com",
+    to: mail,
+    subject: "Merged Pdf",
+    text: "this is the merged Pdf",
+    attachments: [
+      {
+        path: path.join(__dirname, "../upload/merged.pdf")
+      }
+    ]
+};
+
+await transporter.sendMail(mailOptions)
+
+res.send({
+  status: 200,
+  success: true
+})
+
+  } catch (error) {
+    res.send({ status: 400, success: false, message: error.message });
+  }
+}

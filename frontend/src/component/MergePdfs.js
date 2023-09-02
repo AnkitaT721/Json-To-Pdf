@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { clearErrors, uploadPdfs } from "../actions";
+import { clearErrors, getMailAddress, uploadPdfs } from "../actions";
 
 const MergePdfs = () => {
   const dispatch = useDispatch();
 
-  const { error, success } = useSelector((state) => state.uploadFiles);
+  const { error } = useSelector((state) => state.uploadFiles);
+  const { error:mailError, success } = useSelector((state) => state.getEmail);
 
   const [selectedFiles, setSelectedFiles] = useState([]);
+  const [mail, setMail] = useState("");
 
   const uploadFilesHandler = (e) => {
     e.preventDefault();
@@ -19,6 +21,11 @@ const MergePdfs = () => {
     });
 
     dispatch(uploadPdfs(formData));
+
+    const myForm = new FormData();
+
+    myForm.set("mail", mail);
+    dispatch(getMailAddress(myForm));
   };
 
   const handleFileChange = (e) => {
@@ -28,13 +35,18 @@ const MergePdfs = () => {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      alert(error);
       dispatch(clearErrors());
     }
     if (success) {
-      setSelectedFiles([]);
+      alert("Email sent successfully");
     }
-  }, [dispatch, error, success]);
+
+    if (mailError) {
+      alert(mailError);
+      dispatch(clearErrors());
+    }
+  }, [dispatch, error, success, mailError]);
 
   return (
     <>
@@ -49,9 +61,11 @@ const MergePdfs = () => {
             accept=".pdf"
             onChange={handleFileChange}
           />
+          <p>Provide email address to send the merged file</p>
+          <input type="email" value={mail} placeholder="Email" onChange={(e) => setMail(e.target.value)}/>
           <input
             type="submit"
-            value="Merge"
+            value="Merge and Send"
             className="submit-pdfs"
             id="fileInput"
           />

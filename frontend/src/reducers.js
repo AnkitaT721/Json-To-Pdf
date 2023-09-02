@@ -10,6 +10,9 @@ import {
   GET_STUDENT_FAIL,
   GET_STUDENT_REQUEST,
   GET_STUDENT_SUCCESS,
+  SEND_EMAIL_FAIL,
+  SEND_EMAIL_REQUEST,
+  SEND_EMAIL_SUCCESS,
   UPDATE_STUDENT_FAIL,
   UPDATE_STUDENT_REQUEST,
   UPDATE_STUDENT_RESET,
@@ -172,6 +175,65 @@ export const uploadFilesReducer = (state = { pdfs: [] }, action) => {
         error: null,
       };
 
+    default:
+      return state;
+  }
+};
+
+// export const getEmailReducer = (state = { email: {} }, action) => {
+//   switch (action.type) {
+//     case SEND_EMAIL_REQUEST:
+//       return {
+//         ...state,
+//         loading: true,
+//       };
+//     case SEND_EMAIL_SUCCESS:
+//       return {
+//         loading: false,
+//         success: action.payload,
+//         email: action.payload.emailAddress,
+//       };
+//     case SEND_EMAIL_FAIL:
+//       return {
+//         ...state,
+//         loading: false,
+//         error: action.payload,
+//       };
+//     case CLEAR_ERRORS:
+//       return {
+//         ...state,
+//         error: null,
+//       };
+//     default:
+//       return state;
+//   }
+// };
+
+
+export const getEmailReducer = (state = { mail: {} }, action) => {
+  switch (action.type) {
+    case SEND_EMAIL_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case SEND_EMAIL_SUCCESS:
+      return {
+        loading: false,
+        success: action.payload.success,
+        mail: action.payload.mail,
+      };
+    case SEND_EMAIL_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
     default:
       return state;
   }
