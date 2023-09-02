@@ -1,5 +1,5 @@
-/backend/public
+/public
 
-/backend/upload
+/upload
 
-/config.env
+config.env
