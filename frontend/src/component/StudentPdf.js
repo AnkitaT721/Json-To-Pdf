@@ -82,7 +82,7 @@ const StudentPdf = () => {
       </div>
 
       <button
-        className="download-btn"
+        className="btn"
         onClick={downloadPDF}
         disabled={!(loader === false)}
       >

@@ -76,7 +76,7 @@ const AllStudents = () => {
       renderCell: (params) => {
         return (
           <>
-            <Link to={`/update/${params.id}`}>
+            <Link to={`/update/${params.id}`} className="update-btn">
               <BsPencilSquare />
             </Link>
           </>
@@ -120,14 +120,16 @@ const AllStudents = () => {
 
   return (
     <>
+    <div className="main-container">
         <form className="searchBox" onSubmit={searchFileHandler}>
           <input
             type="text"
+            className="input"
             placeholder="User Input"
             onChange={(e) => setKeyword(e.target.value)}
           />
 
-          <input type="submit" value="search" />
+          <input type="submit" className="search-btn" value="search" />
         </form>
 
 
@@ -143,6 +145,7 @@ const AllStudents = () => {
         ) : (
           <h1 className="no-student">No student found</h1>
         )}
+      </div>
       </div>
     </>
   );

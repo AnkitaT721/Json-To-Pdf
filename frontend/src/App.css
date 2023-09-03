@@ -10,12 +10,112 @@
   padding: 2%;
 }
 
-.download-btn {
-    padding: 1vmax;
+.btn {
+  padding: 1vmax;
+  cursor: pointer;
 }
 
-.download-btn:hover {
-    background-color: rgb(143, 142, 142);
-    color: white;
-    border: rgb(143, 142, 142);
+.btn:hover {
+  background-color: rgb(143, 142, 142);
+  color: white;
+}
+
+.student {
+  padding: 2% 2%;
+}
+
+.student-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.address {
+  display: flex;
+  flex-direction: column;
+}
+
+.address > input {
+  margin: 4px;
+  width: 60%;
+}
+
+.link {
+  text-decoration: none;
+  border: 1px solid black;
+  padding: 1vmax;
+  background-color: rgb(230, 225, 225);
+  color: black;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.navlinks {
+  display: flex;
+  flex-direction: row;
+  padding: 2vmax;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.link:hover {
+  background-color: rgb(143, 142, 142);
+  color: white;
+  border: rgb(143, 142, 142);
+}
+
+#link1 {
+  margin-left: 10vmax;
+}
+
+#link2 {
+  margin-right: 10vmax;
+}
+
+.main-container {
+  padding: 2vmax;
+}
+
+.searchBox {
+  padding-bottom: 1vmax;
+}
+
+.search-btn {
+  padding: 0.3vmax;
+  cursor: pointer;
+}
+
+.input {
+  padding: 0.3vmax;
+  margin-right: 4px;
+}
+
+.update-btn {
+  text-decoration: none;
+  color: black;
+}
+
+.update-btn:hover {
+  color: grey;
+}
+
+.info {
+  color: rgb(108, 107, 107);
+}
+
+.submit-pdfs {
+  padding: 0.3vmax;
+  cursor: pointer;
+}
+
+.email {
+  padding: 0.3vmax;
+  margin: 4px;
+}
+
+.merge-form {
+  display: block;
+}
+
+#main {
+  border: 1px solid;
+  margin: 2vmax;
 }

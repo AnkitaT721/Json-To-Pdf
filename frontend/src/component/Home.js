@@ -56,7 +56,7 @@ const Home = () => {
           <h2 className="form-title">Student Data</h2>
 
           <form onSubmit={createStudentHandler}>
-            <p>
+            <p className="data">
               Name: <span></span>
               <input
                 type="text"
@@ -69,7 +69,7 @@ const Home = () => {
               />
             </p>
 
-            <p>
+            <p className="data">
               Major: <span></span>
               <input
                 type="text"
@@ -82,8 +82,9 @@ const Home = () => {
               />
             </p>
 
-            <p className="address">
+            <p className="data">
               Address: <span></span>
+              <div className="address">
               <input
                 type="text"
                 name="state"
@@ -128,18 +129,19 @@ const Home = () => {
                 onChange={(e) => setCity(e.target.value)}
                 placeholder="City"
               />
+              </div>
             </p>
 
-            <button type="submit">Create Student</button>
+            <button type="submit" className="btn" >Create Student</button>
           </form>
         </div>
+        <div className="navlinks">
+      <NavLink to="/students" className="link" id="link1">All Students</NavLink>
+      
+      <NavLink to="/mergepdfs" className="link" id="link2">Merge Pdf</NavLink>
+      </div>
       </section>
-      <div>
-      <NavLink to="/students" className="all-students">All Students</NavLink>
-      </div>
-      <div>
-      <NavLink to="/mergepdfs" className="merge-pdf">Merge Pdf</NavLink>
-      </div>
+      
     </>
   );
 };

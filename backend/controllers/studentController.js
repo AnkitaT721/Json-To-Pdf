@@ -120,7 +120,7 @@ exports.sendEmail = async (req, res) => {  //options object: {email, subject, me
     from: "clickshop2079@gmail.com",
     to: mail,
     subject: "Merged Pdf",
-    text: "this is the merged Pdf",
+    text: "This is your merged Pdf",
     attachments: [
       {
         path: path.join(__dirname, "../upload/merged.pdf")

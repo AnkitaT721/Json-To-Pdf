@@ -50,8 +50,9 @@ const MergePdfs = () => {
 
   return (
     <>
+    <div className="main-container" id="main">
       <h1>Merge Pdf</h1>
-      <p>Select pdf files</p>
+      <p className="info">Select pdf files</p>
       <div>
         <form className="merge-form" onSubmit={uploadFilesHandler}>
           <input
@@ -61,8 +62,8 @@ const MergePdfs = () => {
             accept=".pdf"
             onChange={handleFileChange}
           />
-          <p>Provide email address to send the merged file</p>
-          <input type="email" value={mail} placeholder="Email" onChange={(e) => setMail(e.target.value)}/>
+          <p className="info">Provide email address to send the merged file</p>
+          <input className="email" type="email" value={mail} placeholder="Email" onChange={(e) => setMail(e.target.value)}/>
           <input
             type="submit"
             value="Merge and Send"
@@ -70,6 +71,7 @@ const MergePdfs = () => {
             id="fileInput"
           />
         </form>
+      </div>
       </div>
     </>
   );
